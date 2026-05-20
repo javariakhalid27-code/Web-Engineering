@@ -1,4 +1,3 @@
-// Dynamic CSS setup jo aapne spinner aur markdown ke liye kiya tha
 const styleTag = document.createElement("style");
 styleTag.innerHTML = `
   @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -9,13 +8,11 @@ styleTag.innerHTML = `
 `;
 document.head.appendChild(styleTag);
 
-// Global State management variables
 let subject = "";
 let topic = "";
 let time = "";
 let loading = false;
 
-// UI Elements catch karna
 const subjectInput = document.getElementById('subjectInput');
 const topicInput = document.getElementById('topicInput');
 const timeInput = document.getElementById('timeInput');
@@ -24,12 +21,10 @@ const resultCard = document.getElementById('resultCard');
 const loadingState = document.getElementById('loadingState');
 const markdownContent = document.getElementById('markdownContent');
 
-// Input values ko update karne ke liye event listeners
 subjectInput.addEventListener('input', (e) => subject = e.target.value);
 topicInput.addEventListener('input', (e) => topic = e.target.value);
 timeInput.addEventListener('input', (e) => time = e.target.value);
 
-// Main Generate Plan Function
 generateBtn.addEventListener('click', async () => {
     if (!subject || !topic || !time) {
         alert("Please fill all fields");
@@ -37,8 +32,6 @@ generateBtn.addEventListener('click', async () => {
     }
 
     loading = true;
-    
-    // UI update for loading state
     generateBtn.disabled = true;
     generateBtn.innerHTML = `<span style="display: flex; justify-content: center; align-items: center; gap: 10px;">
         <span style="width: 18px; height: 18px; border: 3px solid rgba(15, 23, 42, 0.2); border-top: 3px solid #0f172a; border-radius: 50%; animation: spin 1s linear infinite;"></span> Generating Plan...
@@ -50,8 +43,8 @@ generateBtn.addEventListener('click', async () => {
     markdownContent.innerHTML = "";
 
     try {
-        // 🚀 Yahan humne localhost hata kar aapka asli live backend daal diya hai!
-        const response = await fetch("https://web-engineering-three.vercel.app/api/generate", {
+        // 🚀 Aapka exact live Vercel backend route connect kar diya hai
+        const response = await fetch("https://web-engineering-project-7r7v.vercel.app/generate-plan", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -61,9 +54,11 @@ generateBtn.addEventListener('click', async () => {
 
         const data = await response.json();
         
-        // Markdown formatting apply karne ka simple function
-        if (data.plan) {
-            markdownContent.innerHTML = formatMarkdown(data.plan);
+        // Agar response data.result mein aa raha hai to use check karein
+        const planText = data.result || data.plan;
+        
+        if (planText) {
+            markdownContent.innerHTML = formatMarkdown(planText);
         } else {
             markdownContent.innerHTML = "❌ Plan nahi ban saka, dobara koshish karein.";
         }
@@ -83,7 +78,6 @@ generateBtn.addEventListener('click', async () => {
     }
 });
 
-// Simple markdown formatter function (ReactMarkdown ka maza simple JavaScript mein)
 function formatMarkdown(text) {
     return text
         .replace(/### (.*?)\n/g, '<h3>$1</h3>')
