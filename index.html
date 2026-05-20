@@ -3,26 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Study Planner</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>🤖 AI Smart Study Planner</title>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body style="margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #0f172a, #1e293b); fontFamily: 'Segoe UI', Roboto, sans-serif; padding: 20px; box-sizing: border-box;">
 
-    <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-lg text-center">
-        <h1 class="text-2xl font-bold text-blue-600 mb-4">📚 AI Study Planner</h1>
-        <p class="text-gray-600 mb-6">Apna topic likhein aur AI se apna personal study plan banayein!</p>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 25px; justify-content: center; align-items: flex-start; max-width: 1100px; width: 100%;">
         
-        <input type="text" id="topicInput" placeholder="E.g., React Hooks, Photosynthesis" 
-               class="w-full p-3 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        
-        <button id="generateBtn" class="w-full bg-blue-600 text-white p-3 rounded-md font-semibold hover:bg-blue-700 transition">
-            Generate Plan ✨
-        </button>
-
-        <div id="result" class="mt-6 text-left hidden">
-            <h3 class="font-bold text-lg text-gray-800 mb-2">Aapka Study Plan:</h3>
-            <div id="planContent" class="text-gray-700 whitespace-pre-line bg-gray-50 p-4 rounded border border-gray-200"></div>
+        <div style="width: 400px; background: #111827; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #1e293b; box-sizing: border-box;">
+            <h1 style="color: #38bdf8; font-size: 24px; font-weight: 700; margin-bottom: 25px; text-align: center;">🤖 AI Smart Study Planner</h1>
+            
+            <input id="subjectInput" style="width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 12px; border: 1px solid #334155; background: #1f2937; color: white; font-size: 15px; outline: none; box-sizing: border-box;" placeholder="Enter Subject (e.g., Physics)">
+            <input id="topicInput" style="width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 12px; border: 1px solid #334155; background: #1f2937; color: white; font-size: 15px; outline: none; box-sizing: border-box;" placeholder="Enter Topic (e.g., Thermodynamics)">
+            <input id="timeInput" style="width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 12px; border: 1px solid #334155; background: #1f2937; color: white; font-size: 15px; outline: none; box-sizing: border-box;" placeholder="Enter Time (e.g., 5 Days)">
+            
+            <button id="generateBtn" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #38bdf8, #0ea5e9); border: none; border-radius: 12px; cursor: pointer; color: #0f172a; font-size: 16px; font-weight: bold; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);">Generate Plan 🚀</button>
         </div>
+
+        <div id="resultCard" style="display: none; flex: 1; min-width: 320px; max-width: 650px; background: #111827; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #1e293b; color: #e2e8f0; box-sizing: border-box;">
+            <h2 style="color: #38bdf8; font-size: 20px; margin: 0 0 15px 0;">📋 Your Personalized Study Plan</h2>
+            <hr style="border: none; height: 1px; background: #334155; margin-bottom: 20px;" />
+            
+            <div id="loadingState" style="text-align: center; padding: 40px 0; display: none;">
+                <div style="height: 12px; background: #1f2937; border-radius: 6px; margin-bottom: 12px; width: 80%;"></div>
+                <div style="height: 12px; background: #1f2937; border-radius: 6px; margin-bottom: 12px; width: 95%;"></div>
+                <div style="height: 12px; background: #1f2937; border-radius: 6px; margin-bottom: 25px; width: 60%;"></div>
+                <p style="color: #94a3b8; margin: 0;">AI is drafting your perfect schedule...</p>
+            </div>
+
+            <div id="markdownContent" class="markdownContent" style="line-height: 1.7; font-size: 16px; color: #cbd5e1;"></div>
+        </div>
+
     </div>
 
     <script src="app.js"></script>
